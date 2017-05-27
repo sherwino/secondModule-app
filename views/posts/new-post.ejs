@@ -1,0 +1,31 @@
+<h1>Create New Post</h1>
+<br>
+<form class="form-horizontal comment-form" action="/post/new" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="input-picName" class="col-sm-2 control-label">Post Name: </label>
+    <div class="col-sm-10">
+    <input class="form-control" type="text" id="input-picName" type="text" name="picName" placeholder="Your Post Name">
+  </div>
+</div>
+
+    <br>
+
+    <br>
+    <div class="form-group">
+    <label for="input-content" class="col-sm-2 control-label">Content: </label>
+    <div class="col-sm-10">
+    <textarea id="input-content" type="text" name="content"
+    class="form-control" placeholder="What's on your mind?"></textarea>
+</div>
+</div>
+    <br>
+
+
+    <div class="input-group input-group-sm">
+      <label for="input-picPath"></label>
+      <input id="input-picPath" type="file" name="picPath">
+    </div>
+<br>
+    <br>
+    <button>Submit</button>
+</form>

@@ -4,28 +4,32 @@
   <p class="error-message">
     <%= errorMessage %>
   </p>
-<% } %>
+  <% } %>
 
+    <form action="/login" method="post" enctype="X-www-form-urlencoded">
+      <div class="input-group input-group-sm">
+        <label for="email-input"> Email </label>
+        <input class="form-control" type="email" name="email" id="email-input" placeholder="e.g., xena@warrior.company">
+      </div>
+      <br>
 
-<form action="/login" method="post">
-  <div>
-    <label for="email-input"> Email </label>
-    <input type="email" name="email" id="email-input"
-      placeholder="e.g., xena@warrior.company">
-  </div>
+      <div class="input-group input-group-sm">
+        <label for="password-input"> Password </label>
+        <input class="form-control" type="password" name="password" id="password-input" placeholder="e.g., *****">
+      </div>
+      <br>
 
-  <div>
-    <label for="password-input"> Password </label>
-    <input type="password" name="password" id="password-input"
-      placeholder="e.g., ••••••••••••">
-  </div>
+      <button> Log In </button>
+    </form>
 
-  <button> Log In </button>
-</form>
+    <br>
+    <a href="/auth/facebook"> Log in w/FB </a>
 
-<p>
-  Don't have an account?
-  <a href="/signup">
-    Create an account.
-  </a>
-</p>
+    <p>OR</p>
+
+    <a href="/auth/google"> Log in w/Google </a>
+
+    <br>
+    <p>Don't have an account?
+      <a href="/signup">Create an account.</a>
+    </p>

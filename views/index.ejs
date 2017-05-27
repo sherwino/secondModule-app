@@ -1,21 +1,38 @@
-<p> Welcome to <%= title %>. </p>
-<!--Lines 4-6: An if statement displays a message for logged in users.-->
-
-<% if (isUserLoggedIn) { %>
-  <p> Hello,  <%= currentUserInfo.name %>. </p>
-<% } %>
-
-<nav>
-  <!--Lines 12-19: An if..else statement displays some of the links to logged in
-   users and others to anonymous users.-->
-  <ul>
-    <% if (!isUserLoggedIn) { %>
-    <li> <a href="/signup"> Sign Up </a> </li>
-    <li> <a href="/login"> Log In </a> </li>
+<!--this is below the main-layout.ejs header-->
+<div>
+  <h1> Welcome to <%= title %>. </h1>
+  <!--Lines 6-11: An if statement displays a message for logged in users.-->
+  <br>
+    <% if (isUserLoggedIn) { %>
+    <p class="welcome"> Hello, <%= currentUserInfo.name %>. Welcome 🤗</p>
+    <br>
     <% } else { %>
-    <li> <a href="/launderers"> Find a Launderer </a> </li>
-    <li> <a href="/dashboard"> See Dashboard </a> </li>
-    <li> <a href="/logout"> Log Out </a> </li>
-    <% } %>
-  </ul>
-</nav>
+      <p class="welcome"> Post all the Funny Cat Images you can find in one spot!<br>Lets laugh together😂</p>
+      <br>
+      <img src=" /images/glasses gif.gif">
+      <% } %>
+</div>
+
+<!---------------------Post to view on page--------------->
+<%if(typeof post !== 'undefined'){%>
+  <%post.forEach((onePost)=>{%>
+
+    <div class="box">
+      <div class="col-xs-6 col-md-4">
+        <p>Made By Creator Id:
+          <%=onePost.creatorId%>
+        </p>
+
+        <a href="/<%=onePost._id%>/postpage">
+          <%=onePost.picName%>
+        </a>
+        <br>
+
+        <img src="<%=onePost.picPath%>">
+      </div>
+    </div>
+
+
+    <br>
+    <%});%>
+      <%}%>

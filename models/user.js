@@ -7,12 +7,7 @@ const userSchema = new Schema(
   name: { type: String },
   email: { type: String },
   password: { type: String },
-  role: {
-    type: String,
-    enum: [ 'normal user', 'admin' ],
-    //^basically saying it's either one or the other.
-    default: 'normal user'
-  },
+  photoAddress: { type: String },
 
 // Login with Facebook users
   facebookID: { type: String },

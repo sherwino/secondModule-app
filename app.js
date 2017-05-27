@@ -17,7 +17,11 @@ const multer             = require('multer');
 
 require ('dotenv').config();
 
-mongoose.connect('mongodb://localhost/secondmodule-app');
+// Tell node to run the code contained in this file
+// (this sets up passport and our strategies)
+require('./config/passport-config.js');
+
+mongoose.connect('mongodb://localhost/secondmoduleApp');
 
 const app = express();
 
@@ -49,6 +53,13 @@ app.use(session({
   })
 }));
 
+app.use(flash());
+
+// These need to come AFTER the session middleware
+app.use(passport.initialize());
+app.use(passport.session());
+// ... and BEFORE our routes
+
 app.use((req, res, next) => {
   if (req.session.currentUser) {
     res.locals.currentUserInfo = req.session.currentUser;
@@ -69,7 +80,13 @@ const authRoutes = require('./routes/auth');
 console.log('auth Routes');
 app.use('/', authRoutes);
 
+const myPostRoutes = require('./routes/post-route.js');
+console.log('myPostRoutes');
+app.use('/', myPostRoutes);
 
+// const myUserRoutes = require('./routes/user-routes.js');
+// app.use('/', myUserRoutes);
+//
 //-------------------------------------------------------------------
 
 

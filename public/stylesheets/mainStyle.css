@@ -1,0 +1,60 @@
+/*Main styling I did*/
+.error-message{
+  background-color: red;
+  color: black;
+  text-align: center;
+  font-size: 25px;
+  border-radius: 5px;
+  width: 75%;
+}
+
+.welcome{
+  text-align: center;
+  font-size: 18px;
+  color: #339a7d;
+}
+.box{
+  text-align: center;
+}
+/*footer{
+  padding-top: 100px;
+  text-align: center;
+}*/
+
+.row{
+  text-align: center;
+}
+
+h1{
+  text-align: center;
+}
+text-align:
+}
+
+.form-horizontal, .form-group {
+    margin-right: -15px;
+    margin-left: -15px;
+
+}
+.form-group {
+    margin-bottom: 15px;
+    width: 400px;
+}
+
+.mainImg{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 400px;
+    height: 350px;
+    text-align: center;
+}
+
+.profilePic{
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 5px;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+}

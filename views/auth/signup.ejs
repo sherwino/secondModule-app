@@ -4,33 +4,46 @@
   <p class="error-message">
     <%= errorMessage %>
   </p>
-<% } %>
+  <% } %>
 
-<form action="/signup" method="post">
-  <div>
-    <label for="name-input"> Name </label>
-    <input type="text" name="name" id="name-input"
-      placeholder="e.g., Diana Prince">
-  </div>
+    <form action="/signup" method="post" enctype="multipart/form-data">
+      <div class="input-group input-group-sm">
+        <label for="name-input"> Name </label>
+        <input class="form-control" type="text" name="name" id="name-input" placeholder="e.g., Diana Prince">
+      </div>
+      <br>
 
-  <div>
-    <label for="email-input"> Email </label>
-    <input type="email" name="email" id="email-input"
-      placeholder="e.g., diana@themyscira.agency">
-  </div>
+      <div class="input-group input-group-sm">
+        <label for="email-input"> Email </label>
+        <input class="form-control" type="email" name="email" id="email-input" placeholder="e.g., Diana@warrior.company">
+      </div>
+      <br>
 
-  <div>
-    <label for="password-input"> Password </label>
-    <input type="password" name="password" id="password-input"
-      placeholder="e.g., ••••••••••••">
-  </div>
+      <div class="input-group input-group-sm">
+        <label for="password-input"> Password </label>
+        <input class="form-control" type="password" name="password" id="password-input" placeholder="e.g., ****">
+      </div>
+      <br>
 
-  <button> Create New Account </button>
-</form>
+      <div class="input-group input-group-sm">
+        <label for="photo-input"></label>
+        <input class="form-control" id="photo-input" type="file" name="photo">
+      </div>
+      <br>
 
-<p>
-  Already have an account?
-  <a href="/login">
+      <button type='submit'> Create New Account </button>
+    </form>
+
+    <a href="/auth/facebook">Log in w/FB</a>
+
+    <p>OR</p>
+
+    <a href="/auth/google">Log in w/Google</a>
+    <br>
+
+    <p>
+      Already have an account?
+      <a href="/login">
     Log in.
   </a>
-</p>
+    </p>

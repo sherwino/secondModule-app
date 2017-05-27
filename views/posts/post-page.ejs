@@ -1,0 +1,56 @@
+<h1>Post: <%=post.picName%></h1>
+<br>
+<p>Content: <%=post.content%></p>
+<br>
+<p>Made by: <strong><%=users.username%><strong></p>
+<img src="<%=post.picPath%>" alt="#">
+
+<div class="reviews">
+<%if(typeof user !== 'undefined'){%>
+<hr>
+<h3>Comments</h3>
+<%if(post.comment.length >-1){%>
+  <%post.comment.forEach((comment)=>{%>
+    <p>Comment: <%=comment.content%></p>
+    <h5>Picture Name: <%=comment.imageName%></h5>
+    <img src="<%=comment.imagePath%>" alt="" class="input-imageName">
+<br>
+  </div>
+  <%});%>
+<%}%>
+
+    <hr>
+    <h3>Write your Comment </h3>
+    <div class="create-review">
+      <form class="form-horizontal comment-form" action="/<%=post._id%>/new/comment" method="post">
+        <!-- ^If you want to post an image with comment add- enctype="multipart/form-data"  -->
+
+        <label for="input-imageName" class="col-sm-2">Name of Post:</label>
+        <br>
+        <div class="col-sm-10">
+        <input id="input-imageName" type="text" name="imageName">
+      </div>
+        <br>
+
+        <br>
+        <label for="input-content" class="col-sm-2">Comment: </label>
+        <br>
+        <div class="col-sm-10">
+        <textarea id="input-content" type="text" name="content" class="form-control"> </textarea>
+      </div>
+        <br>
+
+        <!-- <br>
+        <div>
+          <label for="input-imagePath"> </label>
+          <input id="input-imagePath" type="file" name="imagePath">
+        </div>
+        <br> -->
+
+        <button>Submit</button>
+      </form>
+
+    </div>
+    <%}%>
+
+</center>
