@@ -1,6 +1,7 @@
 <h1>Create New Post</h1>
+<h1><%= isUserLoggedIn %></h1>
 <br>
-<form class="form-horizontal comment-form" action="/post/new" method="post" enctype="multipart/form-data">
+<form class="form-horizontal comment-form" action="/posts/create" method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="input-picName" class="col-sm-2 control-label">Post Name: </label>
     <div class="col-sm-10">

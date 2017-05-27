@@ -46,23 +46,19 @@ app.use(session({
   secret: 'secondmodule-app',
   resave: true,
   saveUninitialized: true,
-  cookie: { maxAge: 60000 },
-  store: new mongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60 // 1 day
-  })
-}));
 
-app.use(flash());
+}));
 
 // These need to come AFTER the session middleware
 app.use(passport.initialize());
 app.use(passport.session());
 // ... and BEFORE our routes
 
+app.use(flash());
+
 app.use((req, res, next) => {
-  if (req.session.currentUser) {
-    res.locals.currentUserInfo = req.session.currentUser;
+  if (req.user) {
+    res.locals.currentUserInfo = req.user;
     res.locals.isUserLoggedIn = true;
   } else {
     res.locals.isUserLoggedIn = false;

@@ -2,7 +2,6 @@
 // 1. Our form
 // 2. LocalStrategy callback
 // 3. (if successful) passport.serializeUser()
-
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const FbStrategy = require('passport-facebook').Strategy;
@@ -19,7 +18,6 @@ const User = require('../models/user.js');
 // Determines WHAT TO SAVE in the session (what to put in the box)
 // (called when you log in)
 passport.serializeUser((user, cb) => {
-  // "cb" is short for "callback"
   cb(null, user._id);
 });
 
@@ -50,7 +48,6 @@ passport.use(new FbStrategy({
   (accessToken, refreshToken, profile, done) => {
     console.log('');
     console.log('FACEBOOK PROFILE ~~~~~~~~~~~~~~~~~~~~~');
-    console.log(profile);
     console.log('');
 
     User.findOne({
@@ -65,8 +62,8 @@ passport.use(new FbStrategy({
 
         // If user is already registered, just log them in!
         if (foundUser) {
-          done(null, foundUser);
-          return;
+          return done(null, foundUser);
+
         }
 
         // Register the user if they are not registered

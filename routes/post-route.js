@@ -7,16 +7,16 @@ const comment = require('../models/comment-post.js');
 
 const ensure = require('connect-ensure-login');
 
-router.get('/create',
+router.get('/posts/new',
   (req, res, next) => {
     console.log('-------');
     res.render('posts/new-post.ejs');
   });
 
 const myUploader = multer({
-  dest: path.join(__dirname, '../public/post')
+  dest: path.join(__dirname, '../public/uploads')
 });
-router.post('/posts/new',
+router.post('/posts/create',
   myUploader.single('picPath'),
 
   (req, res, next) => {
@@ -25,7 +25,7 @@ router.post('/posts/new',
     const newPost = new Post({
       content: req.body.content,
       creatorId: req.user._id,
-      picPath: `/posts/${req.file.filename}`,
+      picPath: `/uploads/${req.file.filename}`,
       picName: req.body.picName
     });
     newPost.save((err) => {
