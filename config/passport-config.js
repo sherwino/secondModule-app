@@ -4,6 +4,7 @@
 // 3. (if successful) passport.serializeUser()
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+const ensure = require('connect-ensure-login');
 const FbStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const LocalStrategy = require('passport-local').Strategy;
@@ -145,7 +146,7 @@ passport.use(new LocalStrategy(
   // 1st arg -> options to customize LocalStrategy
   {
     // <input name="email">
-    emailField: 'email',
+    usernameField: 'email',
     // <input name="password">
     passwordField: 'password'
   },
@@ -153,7 +154,7 @@ passport.use(new LocalStrategy(
   // 2nd arg -> callback for the logic that validates the login
   (email, password, next) => {
     User.findOne({
-        useremail: email
+        username: email
       },
 
       (err, theUser) => {

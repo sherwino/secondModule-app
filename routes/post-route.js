@@ -4,6 +4,8 @@ const multer = require('multer');
 const path = require('path');
 const Post = require('../models/post-model.js');
 const comment = require('../models/comment-post.js');
+const User = require('../models/user');
+
 
 const ensure = require('connect-ensure-login');
 
@@ -58,6 +60,7 @@ router.get('/:id/postpage',
               res.render('posts/post-page', {
                 post: found,
                 users: theUser
+                // users:is what you want to use to call if refering to a user. 
               });
             }
           });
@@ -65,12 +68,9 @@ router.get('/:id/postpage',
       });
 
   });
-const myComments = multer({
-  dest: path.join(__dirname, '../public/comments')
-});
+
 
 router.post('/:id/new/comment',
-  myComments.single('imagePath'),
   (req, res, next) => {
     const commentid = req.params.id;
     Post.findById(commentid, (err, post) => {
@@ -82,8 +82,6 @@ router.post('/:id/new/comment',
         const newComment = new comment({
           content: req.body.content,
           authorId: req.user._id,
-          imagePath: `/comments/${req.file.filename}`,
-          imageName: req.body.imageName
         });
         post.comment.push(newComment);
         post.save((err) => {

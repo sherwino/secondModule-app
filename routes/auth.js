@@ -6,10 +6,8 @@ const router = express.Router();
 const passport = require('passport');
 const path = require('path');
 const multer = require('multer');
-const {
-  ensureLoggedIn,
-  ensureLoggedOut
-} = require('connect-ensure-login');
+const ensure = require('connect-ensure-login');
+
 
 // Require bcrypt and the User model for use in our POST route.
 const User = require('../models/user');
@@ -94,7 +92,7 @@ router.post('/signup',
             return;
           }
           router.get('/profile',
-            ensureLoggedIn('/login'),
+            ensure.ensureLoggedIn('/login'),
             (req, res) => {
               res.render('auth/profile', {
                 user: req.user
@@ -109,7 +107,10 @@ router.post('/signup',
 //End of registration
 
 // -------------------LogIn------------------------
-router.get('/login', (req, res, next) => {
+
+router.get('/login',
+
+(req, res, next) => {
   res.render('auth/login', {
     errorMessage: ''
   });
@@ -125,12 +126,14 @@ router.post('/login', (req, res, next) => {
     });
     return;
   }
+console.log(emailInput);
 
   //Find the user by their email.
   User.findOne({
     email: emailInput
   }, (err, theUser) => {
     if (err || theUser === null) {
+      console.log("couldnt find user!!!!!!!!!!!!!!!!!!!!!");
       res.render('auth/login', {
         errorMessage: `There isn't an account with email ${emailInput}.`
       });
@@ -139,6 +142,7 @@ router.post('/login', (req, res, next) => {
 
     //  Use the compareSync() method to verify the password.
     if (!bcrypt.compareSync(passwordInput, theUser.password)) {
+      console.log("WRONG credentials breh!!!!!!!!!!!!!!!!");
       res.render('auth/login', {
         errorMessage: 'Invalid password.'
       });
@@ -146,29 +150,18 @@ router.post('/login', (req, res, next) => {
     }
 
     // If everything works, save the user’s information in req.session.
-    req.session.currentUser = theUser;
     res.redirect('/');
   });
 });
 
 // -------------------LogOut------------------------
 router.get('/logout', (req, res, next) => {
-  if (!req.session.currentUser) {
-    res.redirect('/');
-    return;
-  }
+  // req.logout() method provided by Passport
+  req.logout();
 
-  // Line 135: Call the req.session.destroy()
-  // to clear the session for log out.
-  req.session.destroy((err) => {
-    if (err) {
-      next(err);
-      return;
-    }
+  req.flash('success', 'You have logged out successfully. 🤠');
 
-    // Line 142: Redirect to the home page when it’s done.
-    res.redirect('/');
-  });
+  res.redirect('/');
 });
 
 // --------------SocialLogins------------------------
